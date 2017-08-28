@@ -7,6 +7,7 @@
 
 <script>
 import Hello from './components/Hello'
+import data from './data/seeds'
 
 export default {
   name: 'app',

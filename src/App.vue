@@ -117,8 +117,4 @@ export default {
     font-size: 1em;
   }
 
-  .label-warning {
-    background-color: #f0ad4e;
-}
-
 </style>

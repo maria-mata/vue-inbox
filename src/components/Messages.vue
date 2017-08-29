@@ -1,6 +1,5 @@
 <template>
   <div class="container messages">
-    <!-- Email List -->
     <Message v-for="email in emailList" :email="email" key=""></Message>
   </div>
 </template>

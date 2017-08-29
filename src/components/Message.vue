@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="col-xs-11">
-        <b-badge class="label label-warning" v-for="label in labels" key="">{{label}}</b-badge>
+        <b-badge variant="warning" class="label label-warning" v-for="label in labels" key="">{{label}}</b-badge>
         <a href="#">
           {{email.subject}}
         </a>

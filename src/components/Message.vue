@@ -8,8 +8,8 @@
             <input class="checkbox" type="checkbox" v-model="checked"/>
           </div>
           <div class="col-xs-2">
-            <icon v-if="starred" class="star" name="star"></icon>
-            <icon v-if="!starred" class="star" name="star-o"></icon>
+            <a v-on:click="unstarEmail"><icon v-if="starred" class="star" name="star"></icon></a>
+            <a v-on:click="starEmail"><icon v-if="!starred" class="star" name="star-o"></icon></a>
           </div>
         </div>
       </div>
@@ -27,6 +27,14 @@
 export default {
   name: 'email',
   props: ['email'],
+  methods: {
+    starEmail(event) {
+      this.starred = true;
+    },
+    unstarEmail(event) {
+      this.starred = false;
+    }
+  },
   data() {
     return {
       isRead: this.email.read,

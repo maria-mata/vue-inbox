@@ -18,18 +18,12 @@
           Mark As Unread
         </b-button>
 
-        <b-form-select class="form-control label-select">
-          <option value="null">Apply label</option>
-          <option value="dev">dev</option>
-          <option value="personal">personal</option>
-          <option value="gschool">gschool</option>
+        <b-form-select v-model="selected" :options="options" class="form-control label-select">
+          <div>Selected: <strong>{{ selected }}</strong></div>
         </b-form-select>
 
-        <b-form-select class="form-control label-select">
-          <option value="null">Remove label</option>
-          <option value="dev">dev</option>
-          <option value="personal">personal</option>
-          <option value="gschool">gschool</option>
+        <b-form-select v-model="selected2" :options="options2" class="form-control label-select">
+          <div>Selected: <strong>{{ selected2 }}</strong></div>
         </b-form-select>
 
         <b-button class="btn btn-default">
@@ -42,6 +36,24 @@
 
 <script>
 export default {
-  name: 'toolbar'
-}
+  name: 'toolbar',
+  data() {
+    return {
+        selected: null,
+        options: [
+          {value: null, text: 'Apply Label'},
+          {value: 'dev', text: 'dev'},
+          {value: 'personal', text: 'personal'},
+          {value: 'gschool', text: 'gschool'}
+        ],
+        selected2: null,
+        options2: [
+          {value: null, text: 'Remove Label'},
+          {value: 'dev', text: 'dev'},
+          {value: 'personal', text: 'personal'},
+          {value: 'gschool', text: 'gschool'}
+        ]
+      }
+    }
+  }
 </script>

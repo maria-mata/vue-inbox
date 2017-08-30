@@ -5,7 +5,7 @@
       <div class="col-xs-1">
         <div class="row">
           <div class="col-xs-2">
-            <input class="checkbox" type="checkbox" v-model="checked"/>
+            <input v-on:click="toggleSelect" class="checkbox" type="checkbox" v-model="checked"/>
           </div>
           <div class="col-xs-2">
             <a v-on:click="unstarEmail"><icon v-if="starred" class="star" name="star"></icon></a>
@@ -33,6 +33,13 @@ export default {
     },
     unstarEmail(event) {
       this.starred = false;
+    },
+    toggleSelect(event) {
+      if (this.isSelected == true) {
+        this.isSelected = false
+      } else {
+        this.isSelected = true
+      }
     }
   },
   data() {

@@ -1,22 +1,17 @@
 <template>
   <div class="container messages">
-    <Message v-for="email in emailList" :email="email" key=""></Message>
+    <Message v-for="email in emails" :email="email" key=""></Message>
   </div>
 </template>
 
 <script>
 import Message from './Message'
-import seeds from '../data/seeds'
 
 export default {
   name: 'messages',
+  props: ['emails'],
   components: {
     Message
-  },
-  data () {
-    return {
-      emailList: seeds
-    }
   }
 }
 </script>

@@ -1,19 +1,16 @@
 <template>
   <div id="app" class="app">
-    <toolbar></toolbar>
-    <messages></messages>
+    <inbox></inbox>
   </div>
 </template>
 
 <script>
-import Toolbar from './components/Toolbar'
-import Messages from './components/Messages'
+import Inbox from './components/Inbox'
 
 export default {
   name: 'app',
   components: {
-    Messages,
-    Toolbar
+    Inbox
   }
 }
 </script>
@@ -23,7 +20,7 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin-left: 1.5em;
+  /*margin-left: 1.5em;*/
   color: #2c3e50;
   margin-top: 60px;
   }

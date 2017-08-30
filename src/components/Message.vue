@@ -34,7 +34,7 @@ export default {
     unstarEmail(event) {
       this.starred = false;
     },
-    toggleSelect(event) {
+    toggleSelect(event) { // maybe move to the parent?
       if (this.isSelected == true) {
         this.isSelected = false
       } else {

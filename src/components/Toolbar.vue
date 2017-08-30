@@ -7,7 +7,7 @@
             <b-badge class="badge">2</b-badge>
             unread messages
           </p>
-          <b-btn v-on:click="bulkSelectDeselect" class="btn btn-default">
+          <b-btn class="btn btn-default">
             <icon v-if="!bulkSelected" name="square-o"></icon>
             <icon v-if="bulkSelected" name="check-square-o"></icon>
           </b-btn>
@@ -41,11 +41,6 @@
 export default {
   name: 'toolbar',
   props: ['emails'],
-  methods: {
-   bulkSelectDeselect(event) {
-     // not sure
-   }
-  },
   data() {
     return {
         bulkSelected: false, // needs to loop though checkboxes

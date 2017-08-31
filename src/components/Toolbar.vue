@@ -16,7 +16,7 @@
             Mark As Read
           </b-btn>
 
-          <b-btn class="btn btn-default">
+          <b-btn v-on:click="markUnread" class="btn btn-default">
             Mark As Unread
           </b-btn>
 
@@ -40,7 +40,7 @@
 <script>
 export default {
   name: 'toolbar',
-  props: ['emails', 'bulkSelect', 'bulkCheckbox', 'markRead'],
+  props: ['emails', 'bulkSelect', 'bulkCheckbox', 'markRead', 'markUnread'],
   data() {
     return {
         selected: null,

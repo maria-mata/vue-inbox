@@ -1,7 +1,7 @@
 <!-- The inbox holds the state of all components -->
 <template>
   <div class="inbox">
-    <toolbar :emails="emails" :bulkSelect="bulkSelect" :bulkCheckbox="bulkCheckbox"></toolbar>
+    <toolbar :emails="emails" :bulkSelect="bulkSelect" :bulkCheckbox="bulkCheckbox" :markRead="markRead"></toolbar>
     <messages :emails="emails" :toggleSelect="toggleSelect"></messages>
   </div>
 </template>
@@ -23,11 +23,18 @@ export default {
     }
   },
   methods: {
+    markRead() {
+      for (let i = 0; i < this.emails.length; i++) {
+        if (this.emails[i].selected == true) {
+          this.emails[i].read = true
+        }
+      }
+    },
     toggleSelect(email) {
       email.selected = !email.selected
     },
     bulkSelect() {
-      for (var i = 0; i < this.emails.length; i++) {
+      for (let i = 0; i < this.emails.length; i++) {
         if (this.bulkCheckbox) {
           this.$set(this.emails[i], 'selected', false)
         } else {

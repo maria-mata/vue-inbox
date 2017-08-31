@@ -29,10 +29,10 @@ export default {
   props: ['email', 'toggleSelect'],
   methods: {
     starEmail(event) {
-      this.starred = true;
+      this.email.starred = true;
     },
     unstarEmail(event) {
-      this.starred = false;
+      this.email.starred = false;
     }
   },
   data() {

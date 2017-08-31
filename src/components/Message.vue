@@ -1,15 +1,15 @@
 <!--  This file to be imported into MESSAGES component -->
 <template>
   <div class="container email">
-    <div class="row message" :class="{read: isRead, unread: !isRead, selected: isSelected}">
+    <div class="row message" :class="{read: this.email.read, unread: !this.email.read, selected: checked}">
       <div class="col-xs-1">
         <div class="row">
           <div class="col-xs-2">
             <input v-on:click="toggleSelect" class="checkbox" type="checkbox" v-model="checked"/>
           </div>
           <div class="col-xs-2">
-            <a v-on:click="unstarEmail"><icon v-if="starred" class="star" name="star"></icon></a>
-            <a v-on:click="starEmail"><icon v-if="!starred" class="star" name="star-o"></icon></a>
+            <a v-on:click="unstarEmail"><icon v-if="this.email.starred" class="star" name="star"></icon></a>
+            <a v-on:click="starEmail"><icon v-if="!this.email.starred" class="star" name="star-o"></icon></a>
           </div>
         </div>
       </div>
@@ -26,28 +26,18 @@
 <script>
 export default {
   name: 'email',
-  props: ['email'],
+  props: ['email', 'toggleSelect', 'bulkSelect'],
   methods: {
     starEmail(event) {
       this.starred = true;
     },
     unstarEmail(event) {
       this.starred = false;
-    },
-    toggleSelect(event) { // maybe move to the parent?
-      if (this.isSelected == true) {
-        this.isSelected = false
-      } else {
-        this.isSelected = true
-      }
     }
   },
   data() {
     return {
-      isRead: this.email.read,
-      isSelected: this.email.selected,
       checked: this.email.selected,
-      starred: this.email.starred,
       labels: this.email.labels
     }
   }

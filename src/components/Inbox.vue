@@ -1,7 +1,8 @@
+<!-- The inbox holds the state of all components -->
 <template>
   <div class="inbox">
-    <toolbar :emails="emails"></toolbar>
-    <messages :emails="emails"></messages>
+    <toolbar :emails="emails" :bulkSelect="bulkSelect"></toolbar>
+    <messages :emails="emails" :toggleSelect="toggleSelect" :bulkSelect="bulkSelect"></messages>
   </div>
 </template>
 
@@ -18,7 +19,16 @@ export default {
   data() {
     return {
       emails: seeds,
-
+    }
+  },
+  methods: {
+    bulkSelect() {
+      this.emails = this.emails.map(email => email.selected = true)
+      return this.emails
+      console.log('bulk select clicking');
+    },
+    toggleSelect(email) {
+      email.selected = !email.selected
     }
   }
 }

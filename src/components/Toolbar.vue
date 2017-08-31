@@ -7,9 +7,9 @@
             <b-badge class="badge">2</b-badge>
             unread messages
           </p>
-          <b-btn v-on:click="bulkSelect" class="btn btn-default">
-            <icon name="square-o"></icon>
-            <icon name="check-square-o"></icon>
+          <b-btn class="btn btn-default" v-on:click="bulkSelect">
+            <icon v-if="!bulkCheckbox" name="square-o"></icon>
+            <icon v-if="bulkCheckbox" name="check-square-o"></icon>
           </b-btn>
 
           <b-btn class="btn btn-default">
@@ -40,7 +40,7 @@
 <script>
 export default {
   name: 'toolbar',
-  props: ['emails', 'bulkSelect'],
+  props: ['emails', 'bulkSelect', 'bulkCheckbox'],
   data() {
     return {
         selected: null,

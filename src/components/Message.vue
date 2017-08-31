@@ -1,11 +1,11 @@
 <!--  This file to be imported into MESSAGES component -->
 <template>
   <div class="container email">
-    <div class="row message" :class="{read: this.email.read, unread: !this.email.read, selected: checked}">
+    <div class="row message" :class="{read: this.email.read, unread: !this.email.read, selected: email.selected}">
       <div class="col-xs-1">
         <div class="row">
           <div class="col-xs-2">
-            <input v-on:click="toggleSelect" class="checkbox" type="checkbox" v-model="checked"/>
+            <input v-on:click="toggleSelect" class="checkbox" type="checkbox" v-model="email.selected"/>
           </div>
           <div class="col-xs-2">
             <a v-on:click="unstarEmail"><icon v-if="this.email.starred" class="star" name="star"></icon></a>
@@ -26,7 +26,7 @@
 <script>
 export default {
   name: 'email',
-  props: ['email', 'toggleSelect', 'bulkSelect'],
+  props: ['email', 'toggleSelect'],
   methods: {
     starEmail(event) {
       this.starred = true;
@@ -37,8 +37,7 @@ export default {
   },
   data() {
     return {
-      checked: this.email.selected,
-      labels: this.email.labels
+      labels: this.email.labels // possibly refactor similar to email selected
     }
   }
 }

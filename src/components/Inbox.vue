@@ -1,7 +1,9 @@
 <!-- The inbox holds the state of all components -->
 <template>
   <div class="inbox">
-    <toolbar :emails="emails" :bulkSelect="bulkSelect" :bulkCheckbox="bulkCheckbox" :markRead="markRead" :markUnread="markUnread" :unreadCount="unreadCount"></toolbar>
+    <toolbar :emails="emails" :bulkSelect="bulkSelect" :bulkCheckbox="bulkCheckbox"
+    :markRead="markRead" :markUnread="markUnread" :unreadCount="unreadCount"
+    :deleteEmail="deleteEmail"></toolbar>
     <messages :emails="emails" :toggleSelect="toggleSelect" :bulkCheckbox="bulkCheckbox"></messages>
   </div>
 </template>
@@ -35,6 +37,11 @@ export default {
     }
   },
   methods: {
+    deleteEmail() {
+      this.emails = this.emails.filter(email => {
+        return !email.selected
+      },[])
+    },
     markRead() {
       for (let i = 0; i < this.emails.length; i++) {
         if (this.emails[i].selected == true) {

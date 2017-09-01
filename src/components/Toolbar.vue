@@ -28,7 +28,7 @@
             <div>Selected: <strong>{{ selected2 }}</strong></div>
           </b-form-select>
 
-          <b-btn class="btn btn-default">
+          <b-btn v-on:click="deleteEmail" class="btn btn-default">
             <icon name="trash-o"></icon>
           </b-btn>
         </div>
@@ -40,7 +40,8 @@
 <script>
 export default {
   name: 'toolbar',
-  props: ['emails', 'bulkSelect', 'bulkCheckbox', 'markRead', 'markUnread', 'unreadCount'],
+  props: ['emails', 'bulkSelect', 'bulkCheckbox', 'markRead', 'markUnread',
+  'unreadCount', 'deleteEmail'],
   data() {
     return {
         selected: null,

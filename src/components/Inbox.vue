@@ -1,8 +1,8 @@
 <!-- The inbox holds the state of all components -->
 <template>
   <div class="inbox">
-    <toolbar :emails="emails" :bulkSelect="bulkSelect" :bulkCheckbox="bulkCheckbox" :markRead="markRead" :markUnread="markUnread"></toolbar>
-    <messages :emails="emails" :toggleSelect="toggleSelect"></messages>
+    <toolbar :emails="emails" :bulkSelect="bulkSelect" :bulkCheckbox="bulkCheckbox" :markRead="markRead" :markUnread="markUnread" :unreadCount="unreadCount"></toolbar>
+    <messages :emails="emails" :toggleSelect="toggleSelect" :bulkCheckbox="bulkCheckbox"></messages>
   </div>
 </template>
 
@@ -18,8 +18,20 @@ export default {
   },
   data() {
     return {
-      emails: seeds,
-      bulkCheckbox: false, // might need to re-define??
+      emails: seeds
+    }
+  },
+  computed: {
+    unreadCount() {
+      return this.emails.reduce((acc, email) => {
+        if (email.read == false) {
+          acc++
+        }
+        return acc
+      }, 0)
+    },
+    bulkCheckbox() {
+      return this.emails.every(email => email.selected == true)
     }
   },
   methods: {
@@ -41,14 +53,11 @@ export default {
       email.selected = !email.selected
     },
     bulkSelect() {
-      for (let i = 0; i < this.emails.length; i++) {
-        if (this.bulkCheckbox) {
-          this.$set(this.emails[i], 'selected', false)
-        } else {
-          this.$set(this.emails[i], 'selected', true)
-        }
+      if (this.bulkCheckbox) {
+        this.emails.forEach(email => this.$set(email, 'selected', false))
+      } else {
+        this.emails.forEach(email => this.$set(email, 'selected', true))
       }
-      this.bulkCheckbox = !this.bulkCheckbox
     }
   }
 }

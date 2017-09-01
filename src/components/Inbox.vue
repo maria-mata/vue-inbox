@@ -3,7 +3,8 @@
   <div class="inbox">
     <toolbar :emails="emails" :bulkSelect="bulkSelect" :bulkCheckbox="bulkCheckbox"
     :markRead="markRead" :markUnread="markUnread" :unreadCount="unreadCount"
-    :deleteEmail="deleteEmail" :applyLabel="applyLabel" :removeLabel="removeLabel"></toolbar>
+    :deleteEmail="deleteEmail" :applyLabel="applyLabel" :removeLabel="removeLabel"
+    :singular="singular"></toolbar>
     <messages :emails="emails" :toggleSelect="toggleSelect" :bulkCheckbox="bulkCheckbox"></messages>
   </div>
 </template>
@@ -24,6 +25,9 @@ export default {
     }
   },
   computed: {
+    singular() {
+      return this.unreadCount == 1
+    },
     unreadCount() {
       return this.emails.reduce((acc, email) => {
         if (email.read == false) {

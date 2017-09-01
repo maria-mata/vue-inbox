@@ -20,7 +20,7 @@
             Mark As Unread
           </b-btn>
 
-          <b-form-select v-model="selected" :options="options" class="form-control label-select">
+          <b-form-select v-bind="applyLabel(selected)" v-model="selected" :options="options" class="form-control label-select">
             <div>Selected: <strong>{{ selected }}</strong></div>
           </b-form-select>
 
@@ -41,7 +41,7 @@
 export default {
   name: 'toolbar',
   props: ['emails', 'bulkSelect', 'bulkCheckbox', 'markRead', 'markUnread',
-  'unreadCount', 'deleteEmail'],
+  'unreadCount', 'deleteEmail', 'applyLabel'],
   data() {
     return {
         selected: null,

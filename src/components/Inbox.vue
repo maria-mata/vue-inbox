@@ -3,7 +3,7 @@
   <div class="inbox">
     <toolbar :emails="emails" :bulkSelect="bulkSelect" :bulkCheckbox="bulkCheckbox"
     :markRead="markRead" :markUnread="markUnread" :unreadCount="unreadCount"
-    :deleteEmail="deleteEmail"></toolbar>
+    :deleteEmail="deleteEmail" :applyLabel="applyLabel"></toolbar>
     <messages :emails="emails" :toggleSelect="toggleSelect" :bulkCheckbox="bulkCheckbox"></messages>
   </div>
 </template>
@@ -37,21 +37,27 @@ export default {
     }
   },
   methods: {
+    applyLabel(label) {
+      for (let i = 0; i < this.emails.length; i++) {
+        let hasLabel = this.emails[i].labels.some(el => el == label)
+        if (this.emails[i].selected && !hasLabel) {
+          this.emails[i].labels.push(label)
+        }
+      }
+    },
     deleteEmail() {
-      this.emails = this.emails.filter(email => {
-        return !email.selected
-      },[])
+      this.emails = this.emails.filter(email => !email.selected)
     },
     markRead() {
       for (let i = 0; i < this.emails.length; i++) {
-        if (this.emails[i].selected == true) {
+        if (this.emails[i].selected) {
           this.emails[i].read = true
         }
       }
     },
     markUnread() {
       for (let i = 0; i < this.emails.length; i++) {
-        if (this.emails[i].selected == true) {
+        if (this.emails[i].selected) {
           this.emails[i].read = false
         }
       }

@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="col-xs-11">
-        <b-badge variant="warning" class="label label-warning" v-for="label in labels" key="">{{label}}</b-badge>
+        <b-badge variant="warning" class="label label-warning" v-for="label in this.email.labels" key="">{{label}}</b-badge>
         <a href="#">
           {{email.subject}}
         </a>
@@ -33,11 +33,6 @@ export default {
     },
     unstarEmail(event) {
       this.email.starred = false;
-    }
-  },
-  data() {
-    return {
-      labels: this.email.labels // possibly refactor similar to email selected
     }
   }
 }

@@ -3,7 +3,7 @@
   <div class="inbox">
     <toolbar :emails="emails" :bulkSelect="bulkSelect" :bulkCheckbox="bulkCheckbox"
     :markRead="markRead" :markUnread="markUnread" :unreadCount="unreadCount"
-    :deleteEmail="deleteEmail" :applyLabel="applyLabel"></toolbar>
+    :deleteEmail="deleteEmail" :applyLabel="applyLabel" :removeLabel="removeLabel"></toolbar>
     <messages :emails="emails" :toggleSelect="toggleSelect" :bulkCheckbox="bulkCheckbox"></messages>
   </div>
 </template>
@@ -38,10 +38,23 @@ export default {
   },
   methods: {
     applyLabel(label) {
-      for (let i = 0; i < this.emails.length; i++) {
-        let hasLabel = this.emails[i].labels.some(el => el == label)
-        if (this.emails[i].selected && !hasLabel) {
-          this.emails[i].labels.push(label)
+      if (label != null) {
+        for (let i = 0; i < this.emails.length; i++) {
+          let hasLabel = this.emails[i].labels.some(el => el == label)
+          if (this.emails[i].selected && !hasLabel) {
+            this.emails[i].labels.push(label)
+          }
+        }
+      }
+    },
+    removeLabel(label) {
+      if (label != null) {
+        for (let i = 0; i < this.emails.length; i++) {
+          let hasLabel = this.emails[i].labels.some(el => el == label)
+          if (hasLabel && this.emails[i].selected) {
+            let index = this.emails[i].labels.indexOf(label)
+            this.emails[i].labels.splice(index, 1)
+          }
         }
       }
     },

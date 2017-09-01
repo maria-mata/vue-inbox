@@ -20,11 +20,13 @@
             Mark As Unread
           </b-btn>
 
-          <b-form-select v-bind="applyLabel(selected)" v-model="selected" :options="options" class="form-control label-select">
+          <b-form-select v-model="selected" v-bind="applyLabel(selected)"
+          :options="options" class="form-control label-select">
             <div>Selected: <strong>{{ selected }}</strong></div>
           </b-form-select>
 
-          <b-form-select v-model="selected2" :options="options2" class="form-control label-select">
+          <b-form-select v-model="selected2" v-bind="removeLabel(selected2)" value="null"
+          :options="options2" class="form-control label-select">
             <div>Selected: <strong>{{ selected2 }}</strong></div>
           </b-form-select>
 
@@ -41,7 +43,8 @@
 export default {
   name: 'toolbar',
   props: ['emails', 'bulkSelect', 'bulkCheckbox', 'markRead', 'markUnread',
-  'unreadCount', 'deleteEmail', 'applyLabel'],
+  'unreadCount', 'deleteEmail', 'applyLabel', 'removeLabel'],
+
   data() {
     return {
         selected: null,
@@ -60,5 +63,5 @@ export default {
         ]
       }
     }
-  }
+}
 </script>

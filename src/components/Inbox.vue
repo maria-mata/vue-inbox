@@ -2,6 +2,7 @@
 <template>
   <div class="inbox">
     <toolbar :emails="emails" :bulkSelect="bulkSelect" :bulkCheckbox="bulkCheckbox"
+    :halfCheckbox="halfCheckbox" :emptyCheckbox="emptyCheckbox"
     :markRead="markRead" :markUnread="markUnread" :unreadCount="unreadCount"
     :deleteEmail="deleteEmail" :applyLabel="applyLabel" :removeLabel="removeLabel"
     :singular="singular"></toolbar>
@@ -37,7 +38,13 @@ export default {
       }, 0)
     },
     bulkCheckbox() {
-      return this.emails.every(email => email.selected == true)
+      return this.emails.every(email => email.selected)
+    },
+    halfCheckbox() {
+      return this.emails.some(email => email.selected) && !this.bulkCheckbox
+    },
+    emptyCheckbox() {
+      return this.emails.every(email => !email.selected)
     }
   },
   methods: {

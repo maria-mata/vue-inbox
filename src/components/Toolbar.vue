@@ -9,7 +9,8 @@
           </p>
           <b-btn class="btn btn-default" v-on:click="bulkSelect">
             <icon v-if="bulkCheckbox" name="check-square-o"></icon>
-            <icon v-if="!bulkCheckbox" name="square-o"></icon>
+            <icon v-if="halfCheckbox" name="minus-square-o"></icon>
+            <icon v-if="emptyCheckbox" name="square-o"></icon>
           </b-btn>
 
           <b-btn v-on:click="markRead" class="btn btn-default">
@@ -42,8 +43,9 @@
 <script>
 export default {
   name: 'toolbar',
-  props: ['emails', 'bulkSelect', 'bulkCheckbox', 'markRead', 'markUnread',
-  'unreadCount', 'deleteEmail', 'applyLabel', 'removeLabel', 'singular'],
+  props: ['emails', 'bulkSelect', 'bulkCheckbox', 'halfCheckbox', 'emptyCheckbox',
+  'markRead', 'markUnread', 'unreadCount', 'deleteEmail', 'applyLabel',
+  'removeLabel', 'singular'],
 
   data() {
     return {

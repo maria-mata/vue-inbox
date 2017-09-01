@@ -13,25 +13,25 @@
             <icon v-if="emptyCheckbox" name="square-o"></icon>
           </b-btn>
 
-          <b-btn v-on:click="markRead" class="btn btn-default">
+          <b-btn v-on:click="markRead" class="btn btn-default" :disabled="emptyCheckbox">
             Mark As Read
           </b-btn>
 
-          <b-btn v-on:click="markUnread" class="btn btn-default">
+          <b-btn v-on:click="markUnread" class="btn btn-default" :disabled="emptyCheckbox">
             Mark As Unread
           </b-btn>
 
-          <b-form-select v-model="selected" v-bind="applyLabel(selected)"
-          :options="options" class="form-control label-select">
+          <b-form-select v-model="selected" v-bind="applyLabel(selected)" :options="options"
+          :disabled="emptyCheckbox" class="form-control label-select" >
             <div>Selected: <strong>{{ selected }}</strong></div>
           </b-form-select>
 
-          <b-form-select v-model="selected2" v-bind="removeLabel(selected2)" value="null"
-          :options="options2" class="form-control label-select">
+          <b-form-select v-model="selected2" v-bind="removeLabel(selected2)" :options="options2"
+          :disabled="emptyCheckbox" class="form-control label-select">
             <div>Selected: <strong>{{ selected2 }}</strong></div>
           </b-form-select>
 
-          <b-btn v-on:click="deleteEmail" class="btn btn-default">
+          <b-btn v-on:click="deleteEmail" class="btn btn-default" :disabled="emptyCheckbox">
             <icon name="trash-o"></icon>
           </b-btn>
         </div>

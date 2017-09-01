@@ -2,10 +2,9 @@
 <template>
   <div class="inbox">
     <toolbar :emails="emails" :bulkSelect="bulkSelect" :bulkCheckbox="bulkCheckbox"
-    :halfCheckbox="halfCheckbox" :emptyCheckbox="emptyCheckbox"
-    :markRead="markRead" :markUnread="markUnread" :unreadCount="unreadCount"
-    :deleteEmail="deleteEmail" :applyLabel="applyLabel" :removeLabel="removeLabel"
-    :singular="singular"></toolbar>
+    :halfCheckbox="halfCheckbox" :emptyCheckbox="emptyCheckbox" :markRead="markRead"
+    :markUnread="markUnread" :unreadCount="unreadCount" :deleteEmail="deleteEmail"
+    :applyLabel="applyLabel" :removeLabel="removeLabel" :singular="singular"></toolbar>
     <messages :emails="emails" :toggleSelect="toggleSelect" :bulkCheckbox="bulkCheckbox"></messages>
   </div>
 </template>

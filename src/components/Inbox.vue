@@ -25,9 +25,6 @@ export default {
     }
   },
   computed: {
-    singular() {
-      return this.unreadCount == 1
-    },
     unreadCount() {
       return this.emails.reduce((acc, email) => {
         if (email.read == false) {

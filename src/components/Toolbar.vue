@@ -5,7 +5,7 @@
         <div class="col-md-12">
           <p class="pull-right">
             <b-badge class="badge">{{ unreadCount }}</b-badge>
-            unread <span v-if="!singular">messages</span><span v-if="singular">message</span>
+            unread <span v-if="unreadCount != 1">messages</span><span v-if="unreadCount == 1">message</span>
           </p>
           <b-btn class="btn btn-default" v-on:click="bulkSelect">
             <icon v-if="bulkCheckbox" name="check-square-o"></icon>
@@ -45,7 +45,7 @@ export default {
   name: 'toolbar',
   props: ['emails', 'bulkSelect', 'bulkCheckbox', 'halfCheckbox', 'emptyCheckbox',
   'markRead', 'markUnread', 'unreadCount', 'deleteEmail', 'applyLabel',
-  'removeLabel', 'singular'],
+  'removeLabel'],
 
   data() {
     return {

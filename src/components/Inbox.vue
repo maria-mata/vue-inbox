@@ -4,7 +4,7 @@
     <toolbar :emails="emails" :bulkSelect="bulkSelect" :bulkCheckbox="bulkCheckbox"
     :halfCheckbox="halfCheckbox" :emptyCheckbox="emptyCheckbox" :markRead="markRead"
     :markUnread="markUnread" :unreadCount="unreadCount" :deleteEmail="deleteEmail"
-    :applyLabel="applyLabel" :removeLabel="removeLabel" :singular="singular"></toolbar>
+    :applyLabel="applyLabel" :removeLabel="removeLabel"></toolbar>
     <messages :emails="emails" :toggleSelect="toggleSelect" :bulkCheckbox="bulkCheckbox"></messages>
   </div>
 </template>
@@ -12,17 +12,31 @@
 <script>
 import Toolbar from './Toolbar'
 import Messages from './Messages'
-import seeds from '../data/seeds'
+import Compose from './Compose'
+// import seeds from '../data/seeds'
+
+const url = 'http://localhost:8082/api'
 
 export default {
   components: {
     Messages,
-    Toolbar
+    Toolbar,
+    Compose
   },
   data() {
     return {
-      emails: seeds
+      emails: []
     }
+  },
+  async mounted() {
+    const data = await fetch(`${url}/messages`)
+    const response = await data.json()
+    this.emails = response._embedded.messages
+    console.log('loading from server!');
+    // .map(message => {
+    //   message.selected = false
+    //   return message
+    // })
   },
   computed: {
     unreadCount() {

@@ -5,7 +5,8 @@
         <div class="col-md-12">
           <p class="pull-right">
             <b-badge class="badge">{{ unreadCount }}</b-badge>
-            unread <span v-if="unreadCount != 1">messages</span><span v-if="unreadCount == 1">message</span>
+            unread <span v-if="unreadCount != 1">messages</span>
+            <span v-if="unreadCount == 1">message</span>
           </p>
           <b-btn class="btn btn-default" v-on:click="bulkSelect">
             <icon v-if="bulkCheckbox" name="check-square-o"></icon>
@@ -21,12 +22,12 @@
             Mark As Unread
           </b-btn>
 
-          <b-form-select v-model="selected" v-bind="applyLabel(selected)" :options="options"
+          <b-form-select v-model="selected" v-bind:change="applyLabel(selected)" :options="options"
           :disabled="emptyCheckbox" class="form-control label-select" >
             <div>Selected: <strong>{{ selected }}</strong></div>
           </b-form-select>
 
-          <b-form-select v-model="selected2" v-bind="removeLabel(selected2)" :options="options2"
+          <b-form-select v-model="selected2" v-bind:change="removeLabel(selected2)" :options="options2"
           :disabled="emptyCheckbox" class="form-control label-select">
             <div>Selected: <strong>{{ selected2 }}</strong></div>
           </b-form-select>
@@ -46,7 +47,12 @@ export default {
   props: ['emails', 'bulkSelect', 'bulkCheckbox', 'halfCheckbox', 'emptyCheckbox',
   'markRead', 'markUnread', 'unreadCount', 'deleteEmail', 'applyLabel',
   'removeLabel'],
-
+  // methods: {
+  //   firstSelect() {
+  //     this.applyLabel(this.selected)
+  //     this.selected = null
+  //   }
+  // },
   data() {
     return {
         selected: null,

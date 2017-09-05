@@ -1,6 +1,7 @@
 <template>
   <div class="container messages">
-    <Message v-for="email in emails" :email="email" key="" :toggleSelect="toggleSelect"></Message>
+    <Message v-for="email in emails" :email="email" key=""
+    :toggleSelect="toggleSelect"></Message>
   </div>
 </template>
 

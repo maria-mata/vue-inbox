@@ -5,10 +5,10 @@
       <div class="col-xs-1">
         <div class="row">
           <div class="col-xs-2">
-            <input v-on:click="toggleSelect" class="checkbox" type="checkbox" v-model="email.selected"/>
+            <input class="checkbox" type="checkbox" v-model="email.selected"/>
           </div>
           <div class="col-xs-2">
-            <a v-on:click="toggleStar" v-model="email.starred"><icon v-if="email.starred" class="star" name="star"></icon>
+            <a v-on:click="toggleStar(email)"><icon v-if="email.starred" class="star" name="star"></icon>
             <icon v-if="!email.starred" class="star" name="star-o"></icon></a>
           </div>
         </div>
@@ -24,6 +24,6 @@
 <script>
 export default {
   name: 'email',
-  props: ['email', 'toggleSelect', 'toggleStar']
+  props: ['email', 'toggleStar']
 }
 </script>

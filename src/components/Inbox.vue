@@ -5,7 +5,7 @@
     :halfCheckbox="halfCheckbox" :emptyCheckbox="emptyCheckbox" :markRead="markRead"
     :markUnread="markUnread" :unreadCount="unreadCount" :deleteEmail="deleteEmail"
     :applyLabel="applyLabel" :removeLabel="removeLabel"></toolbar>
-    <messages :emails="emails" :toggleSelect="toggleSelect" :bulkCheckbox="bulkCheckbox"
+    <messages :emails="emails" :bulkCheckbox="bulkCheckbox"
     :toggleStar="toggleStar"></messages>
   </div>
 </template>
@@ -160,9 +160,24 @@ export default {
     },
     toggleStar(email) {
       email.starred = !email.starred
-    },
-    toggleSelect(email) {
-      email.selected = !email.selected
+      const data = {
+        "messageIds" : [email.id],
+        "command" : "star",
+        "star" : email.starred
+      };
+      const settings = {
+        method: 'PATCH',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      };
+      fetch(`${url}/messages`, settings)
+       .then(response => {
+         if(response.ok){
+           console.log(response);
+         }
+       })
     },
     bulkSelect() {
       if (this.bulkCheckbox) {

@@ -8,16 +8,14 @@
             <input v-on:click="toggleSelect" class="checkbox" type="checkbox" v-model="email.selected"/>
           </div>
           <div class="col-xs-2">
-            <a v-on:click="unstarEmail"><icon v-if="this.email.starred" class="star" name="star"></icon></a>
-            <a v-on:click="starEmail"><icon v-if="!this.email.starred" class="star" name="star-o"></icon></a>
+            <a v-on:click="toggleStar" v-model="email.starred"><icon v-if="email.starred" class="star" name="star"></icon>
+            <icon v-if="!email.starred" class="star" name="star-o"></icon></a>
           </div>
         </div>
       </div>
       <div class="col-xs-11">
         <b-badge variant="warning" class="label label-warning" v-for="label in this.email.labels" key="">{{label}}</b-badge>
-        <a href="#">
-          {{email.subject}}
-        </a>
+        <a href="#">{{email.subject}}</a>
       </div>
     </div>
   </div>
@@ -26,14 +24,6 @@
 <script>
 export default {
   name: 'email',
-  props: ['email', 'toggleSelect'],
-  methods: {
-    starEmail(event) {
-      this.email.starred = true;
-    },
-    unstarEmail(event) {
-      this.email.starred = false;
-    }
-  }
+  props: ['email', 'toggleSelect', 'toggleStar']
 }
 </script>

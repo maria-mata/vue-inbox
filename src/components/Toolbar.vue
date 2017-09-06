@@ -47,12 +47,6 @@ export default {
   props: ['emails', 'bulkSelect', 'bulkCheckbox', 'halfCheckbox', 'emptyCheckbox',
   'markRead', 'markUnread', 'unreadCount', 'deleteEmail', 'applyLabel',
   'removeLabel'],
-  // methods: {
-  //   firstSelect() {
-  //     this.applyLabel(this.selected)
-  //     this.selected = null
-  //   }
-  // },
   data() {
     return {
         selected: null,

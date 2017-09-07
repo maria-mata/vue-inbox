@@ -22,12 +22,12 @@
             Mark As Unread
           </b-btn>
 
-          <b-form-select v-model="selected" v-bind:change="applyLabel(selected)" :options="options"
+          <b-form-select v-model="selected" :options="options"
           :disabled="emptyCheckbox" class="form-control label-select" >
             <div>Selected: <strong>{{ selected }}</strong></div>
           </b-form-select>
 
-          <b-form-select v-model="selected2" v-bind:change="removeLabel(selected2)" :options="options2"
+          <b-form-select v-model="selected2" :options="options2"
           :disabled="emptyCheckbox" class="form-control label-select">
             <div>Selected: <strong>{{ selected2 }}</strong></div>
           </b-form-select>
@@ -42,27 +42,92 @@
 </template>
 
 <script>
+const url = 'http://localhost:8082/api'
+
 export default {
   name: 'toolbar',
   props: ['emails', 'bulkSelect', 'bulkCheckbox', 'halfCheckbox', 'emptyCheckbox',
-  'markRead', 'markUnread', 'unreadCount', 'deleteEmail', 'applyLabel',
-  'removeLabel'],
+  'markRead', 'markUnread', 'unreadCount', 'deleteEmail', 'selected', 'selected2',
+  'options', 'options2'],
+  watch: {
+    selected(label) {
+      if (label != null) {
+        const ids = []
+        for (let i = 0; i < this.emails.length; i++) {
+          let hasLabel = this.emails[i].labels.some(el => el == label)
+          if (this.emails[i].selected && !hasLabel) {
+            this.emails[i].labels.push(label)
+            ids.push(this.emails[i].id)
+          }
+        }
+        const data = {
+          "messageIds" : ids,
+          "command" : "addLabel",
+          "label": label
+        }
+        const settings = {
+          method: 'PATCH',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        }
+        fetch(`${url}/messages`, settings)
+         .then(response => {
+           if(response.ok) {
+             console.log(response);
+           }
+         })
+      }
+    },
+    selected2(label) {
+      if (label != null) {
+        const ids = []
+        for (let i = 0; i < this.emails.length; i++) {
+          let hasLabel = this.emails[i].labels.some(el => el == label)
+          if (hasLabel && this.emails[i].selected) {
+            let index = this.emails[i].labels.indexOf(label)
+            this.emails[i].labels.splice(index, 1)
+            ids.push(this.emails[i].id)
+          }
+        }
+        const data = {
+          "messageIds" : ids,
+          "command" : "removeLabel",
+          "label": label
+        }
+        const settings = {
+          method: 'PATCH',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        }
+        fetch(`${url}/messages`, settings)
+         .then(response => {
+           if(response.ok) {
+             console.log(response);
+           }
+         })
+      }
+    }
+  },
   data() {
     return {
-        selected: null,
-        options: [
-          {value: null, text: 'Apply Label'},
-          {value: 'dev', text: 'dev'},
-          {value: 'personal', text: 'personal'},
-          {value: 'gschool', text: 'gschool'}
-        ],
-        selected2: null,
-        options2: [
-          {value: null, text: 'Remove Label'},
-          {value: 'dev', text: 'dev'},
-          {value: 'personal', text: 'personal'},
-          {value: 'gschool', text: 'gschool'}
-        ]
+        // selected: null,
+        // options: [
+        //   {value: null, text: 'Apply Label'},
+        //   {value: 'dev', text: 'dev'},
+        //   {value: 'personal', text: 'personal'},
+        //   {value: 'gschool', text: 'gschool'}
+        // ],
+        // selected2: null,
+        // options2: [
+        //   {value: null, text: 'Remove Label'},
+        //   {value: 'dev', text: 'dev'},
+        //   {value: 'personal', text: 'personal'},
+        //   {value: 'gschool', text: 'gschool'}
+        // ]
       }
     }
 }

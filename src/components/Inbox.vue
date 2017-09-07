@@ -4,9 +4,8 @@
     <toolbar :emails="emails" :bulkSelect="bulkSelect" :bulkCheckbox="bulkCheckbox"
     :halfCheckbox="halfCheckbox" :emptyCheckbox="emptyCheckbox" :markRead="markRead"
     :markUnread="markUnread" :unreadCount="unreadCount" :deleteEmail="deleteEmail"
-    :applyLabel="applyLabel" :removeLabel="removeLabel"></toolbar>
-    <messages :emails="emails" :bulkCheckbox="bulkCheckbox"
-    :toggleStar="toggleStar"></messages>
+    :selected="selected" :selected2="selected2" :options="options" :options2="options2"></toolbar>
+    <messages :emails="emails" :bulkCheckbox="bulkCheckbox" :toggleStar="toggleStar"></messages>
   </div>
 </template>
 
@@ -26,7 +25,21 @@ export default {
   },
   data() {
     return {
-      emails: []
+      emails: [],
+      selected: null,
+      options: [
+        {value: null, text: 'Apply Label'},
+        {value: 'dev', text: 'dev'},
+        {value: 'personal', text: 'personal'},
+        {value: 'gschool', text: 'gschool'}
+      ],
+      selected2: null,
+      options2: [
+        {value: null, text: 'Remove Label'},
+        {value: 'dev', text: 'dev'},
+        {value: 'personal', text: 'personal'},
+        {value: 'gschool', text: 'gschool'}
+      ]
     }
   },
   async mounted() {
@@ -57,27 +70,6 @@ export default {
     },
   },
   methods: {
-    applyLabel(label) {
-      if (label != null) {
-        for (let i = 0; i < this.emails.length; i++) {
-          let hasLabel = this.emails[i].labels.some(el => el == label)
-          if (this.emails[i].selected && !hasLabel) {
-            this.emails[i].labels.push(label)
-          }
-        }
-      }
-    },
-    removeLabel(label) {
-      if (label != null) {
-        for (let i = 0; i < this.emails.length; i++) {
-          let hasLabel = this.emails[i].labels.some(el => el == label)
-          if (hasLabel && this.emails[i].selected) {
-            let index = this.emails[i].labels.indexOf(label)
-            this.emails[i].labels.splice(index, 1)
-          }
-        }
-      }
-    },
     deleteEmail() {
       const ids = []
       this.emails = this.emails.filter(email => {

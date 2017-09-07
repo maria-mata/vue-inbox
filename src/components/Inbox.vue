@@ -4,7 +4,9 @@
     <toolbar :emails="emails" :bulkSelect="bulkSelect" :bulkCheckbox="bulkCheckbox"
     :halfCheckbox="halfCheckbox" :emptyCheckbox="emptyCheckbox" :markRead="markRead"
     :markUnread="markUnread" :unreadCount="unreadCount" :deleteEmail="deleteEmail"
-    :selected="selected" :selected2="selected2" :options="options" :options2="options2"></toolbar>
+    :selected="selected" :selected2="selected2" :options="options" :options2="options2"
+    :toggleCompose="toggleCompose"></toolbar>
+    <compose :showCompose="showCompose"></compose>
     <messages :emails="emails" :bulkCheckbox="bulkCheckbox" :toggleStar="toggleStar"></messages>
   </div>
 </template>
@@ -26,6 +28,7 @@ export default {
   data() {
     return {
       emails: [],
+      showCompose: false,
       selected: null,
       options: [
         {value: null, text: 'Apply Label'},
@@ -70,6 +73,12 @@ export default {
     },
   },
   methods: {
+    toggleCompose() {
+      this.showCompose = !this.showCompose
+    },
+    sendEmail() {
+      // sends the email / hides the compose form
+    },
     deleteEmail() {
       const ids = []
       this.emails = this.emails.filter(email => {

@@ -2,7 +2,7 @@
   <div class="container">
     <div v-if="showCompose" class="compose">
       <!-- Compose form to be imported into the toolbar component -->
-      <b-form class="form-horizontal well">
+      <b-form v-on:submit.prevent="sendEmail" class="form-horizontal well">
         <div class="form-group">
           <div class="col-sm-8 col-sm-offset-2">
             <h4>Compose Message</h4>
@@ -32,6 +32,6 @@
 
 <script>
 export default {
-  props: ['showCompose']
+  props: ['showCompose', 'sendEmail']
 }
 </script>

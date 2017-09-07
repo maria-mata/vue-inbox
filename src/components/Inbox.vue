@@ -6,7 +6,7 @@
     :markUnread="markUnread" :unreadCount="unreadCount" :deleteEmail="deleteEmail"
     :selected="selected" :selected2="selected2" :options="options" :options2="options2"
     :toggleCompose="toggleCompose"></toolbar>
-    <compose :showCompose="showCompose"></compose>
+    <compose :showCompose="showCompose" :sendEmail="sendEmail"></compose>
     <messages :emails="emails" :bulkCheckbox="bulkCheckbox" :toggleStar="toggleStar"></messages>
   </div>
 </template>
@@ -76,8 +76,15 @@ export default {
     toggleCompose() {
       this.showCompose = !this.showCompose
     },
-    sendEmail() {
+    sendEmail(event) {
       // sends the email / hides the compose form
+      // const data = {
+      //   "subject": this.$subject,
+      //   "body": this.$body
+      // }
+      console.log('clicking');
+      // console.log(data);
+      // this.showCompose = false;
     },
     deleteEmail() {
       const ids = []

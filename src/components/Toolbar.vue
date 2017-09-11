@@ -45,7 +45,8 @@
 </template>
 
 <script>
-const url = 'http://localhost:8082/api'
+// const url = 'http://localhost:8082/api'
+const url = 'https://immense-oasis-78157.herokuapp.com/api'
 
 export default {
   name: 'toolbar',

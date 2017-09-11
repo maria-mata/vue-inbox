@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <div v-if="showCompose" class="compose">
-      <!-- Compose form to be imported into the toolbar component -->
       <b-form v-on:submit.prevent="sendEmail" class="form-horizontal well">
         <div class="form-group">
           <div class="col-sm-8 col-sm-offset-2">
@@ -11,13 +10,13 @@
         <div class="form-group">
           <label for="subject" class="col-sm-2 control-label">Subject</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="subject" placeholder="Enter a subject" name="subject">
+            <input type="text" class="form-control" v-model="composeForm.subject" placeholder="Enter a subject" name="subject">
           </div>
         </div>
         <div class="form-group">
           <label for="body" class="col-sm-2 control-label">Body</label>
           <div class="col-sm-8">
-            <textarea name="body" id="body" class="form-control"></textarea>
+            <textarea name="body" v-model="composeForm.body" class="form-control"></textarea>
           </div>
         </div>
         <div class="form-group">
@@ -32,6 +31,6 @@
 
 <script>
 export default {
-  props: ['showCompose', 'sendEmail']
+  props: ['showCompose', 'sendEmail', 'composeForm']
 }
 </script>

@@ -6,7 +6,7 @@
     :markUnread="markUnread" :unreadCount="unreadCount" :deleteEmail="deleteEmail"
     :selected="selected" :selected2="selected2" :options="options" :options2="options2"
     :toggleCompose="toggleCompose"></toolbar>
-    <compose :showCompose="showCompose" :sendEmail="sendEmail"></compose>
+    <compose :showCompose="showCompose" :sendEmail="sendEmail" :composeForm="composeForm"></compose>
     <messages :emails="emails" :bulkCheckbox="bulkCheckbox" :toggleStar="toggleStar"></messages>
   </div>
 </template>
@@ -17,7 +17,8 @@ import Messages from './Messages'
 import Compose from './Compose'
 // import seeds from '../data/seeds'
 
-const url = 'http://localhost:8082/api'
+// const url = 'http://localhost:8082/api'
+const url = 'https://immense-oasis-78157.herokuapp.com/api'
 
 export default {
   components: {
@@ -28,6 +29,10 @@ export default {
   data() {
     return {
       emails: [],
+      composeForm: {
+        subject: '',
+        body: ''
+      },
       showCompose: false,
       selected: null,
       options: [
@@ -55,12 +60,8 @@ export default {
   },
   computed: {
     unreadCount() {
-      return this.emails.reduce((acc, email) => {
-        if (email.read == false) {
-          acc++
-        }
-        return acc
-      }, 0)
+      let unread = this.emails.filter(email => !email.read)
+      return unread.length
     },
     bulkCheckbox() {
       return this.emails.every(email => email.selected)
@@ -77,14 +78,25 @@ export default {
       this.showCompose = !this.showCompose
     },
     sendEmail(event) {
-      // sends the email / hides the compose form
-      // const data = {
-      //   "subject": this.$subject,
-      //   "body": this.$body
-      // }
-      console.log('clicking');
-      // console.log(data);
-      // this.showCompose = false;
+      const data = {
+        "subject": this.composeForm.subject,
+        "body": this.composeForm.body
+      }
+      this.emails.push(data)
+      const settings = {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      };
+      fetch(`${url}/messages`, settings)
+       .then(response => {
+         if(response.ok){
+           console.log(response);
+         }
+       })
+      this.showCompose = false
     },
     deleteEmail() {
       const ids = []
